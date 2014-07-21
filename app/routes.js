@@ -1,29 +1,33 @@
 // app.routes.js
 module.exports = function(app, passport) {
 
-	// Render the home page, index.html
+	// Render the home page, index.ejs
 	app.get('/', function(req, res) {
-		res.render('index.html');
+		res.render('index.ejs');
 	});
 
-	// Render the login page, login.html
+	// Render the login page, login.ejs
 	app.get('/login', function(req, res) {
-		res.render('login.html', { message: req.flash('loginMessage') });
+		res.render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// Process the login form
 	//app.post('/login', passport stuff)
 
-	// Render the signup page, signup.html
+	// Render the signup page, signup.ejs
 	app.get('/signup', function(req, res) {
-		res.render('signup.html', { message: req.flash('signupMessage' )});
+		res.render('signup.ejs', { message: req.flash('signupMessage' )});
 	});
 
 	// Process the signup form
-	//app.post('/signup', passport stuff);
+	app.post('/signup', passport.authenticate('local-signup', {
+		successRedirect: '/profile.ejs',
+		failureRedirect: '/signup.ejs',
+		failureFlash: true // allow flash messages
+	}));
 
 	app.get('/profile', isLoggedIn, function(res, req) {
-		res.render('profile.html', {
+		res.render('profile.ejs', {
 			user: req.user
 		});
 	});

@@ -1,6 +1,5 @@
 /*
-app.js - this is the central file of the app. It glues everything
-together
+app.js - this is the central file of the app. It glues everything together.
 */
 
 // Let's start with adding all the modules to our app
@@ -20,13 +19,19 @@ var configDB = require('./config/database.js');
 // connect to database
 mongoose.connect(configDB.url);
 
-//require('/config/passport.js')(passport);
+require('./config/passport.js')(passport);
 
 // Set up the app to use modules when needed
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
 
+// set up ejs for templating
+app.set('view engine', 'ejs');
+
+app.use(session({
+	secret: 'nevilandjonmakeanapp'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
