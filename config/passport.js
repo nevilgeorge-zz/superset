@@ -2,6 +2,7 @@
 
 // load everything we need
 var LocalStrategy = require('passport-local').Strategy,
+	flash = require('connect-flash'),
 	User = require('../app/models/user.js');
 
 module.exports = function(passport) {
@@ -9,12 +10,12 @@ module.exports = function(passport) {
 	// Serialize (convert to text/binary form) when logged in, deserialize when logged out.
 
 	// Serialize user
-	passport.serializeUser(function(id, done) {
+	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
 
-	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, reply) {
+	passport.deserializeUser(function(user, done) {
+		User.findById(user.id, function(err, reply) {
 			done(err, user);
 		});
 	});
@@ -34,14 +35,14 @@ module.exports = function(passport) {
 	function(req, email, password, done) {
 		// asynchronous. User.findOne will not fire until data is sent back
 		process.nextTick(function() {
-			User.findOne({ 'local-email': email}, function(err, user) {
+			User.findOne({ 'local.email': email }, function(err, user) {
 				// check for errors first
 				if (err) {
 					return done(err);
 				}
 				// then, check to see if an email is already being used
 				if (user) {
-					return done(null, false, req.flash('signUpMessage', 'Email already taken!'));
+					return done(null, false, req.flash('signupMessage', 'Email already exists!'));
 				} else {
 					// create the user
 					var newUser = new User();
@@ -60,4 +61,27 @@ module.exports = function(passport) {
 	}
 	));
 
+	passport.use('local-login', new LocalStrategy({
+		usernameField: 'email',
+		passwordField: 'password',
+		passReqToCallback: true
+	},
+	// callback with email and password from our form
+	function(req, email, password, done) {
+		User.findOne({ 'local.email': email }, function(err, user) {
+			if (err) {
+				return done(err);
+			}
+
+			if (!user) {
+				return done(null, false, req.flash('loginMessage', 'incorrect username!'));
+			}
+
+			if (!user.validPassword(password)) {
+				return done(null, false, req.flash('loginMessage', 'incorrect password!'));
+			}
+			return done(null, user);
+		});
+	}
+	));
 }

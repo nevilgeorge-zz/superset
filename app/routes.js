@@ -12,21 +12,26 @@ module.exports = function(app, passport) {
 	});
 
 	// Process the login form
-	//app.post('/login', passport stuff)
+	app.post('/login', passport.authenticate('local-login', {
+		successRedirect: '/profile',
+		failureRedirect: '/login',
+		failureFlash: true // allow flash messages
+	}));
 
 	// Render the signup page, signup.ejs
 	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage' )});
+		res.render('signup.ejs', { message: req.flash('signupMessage')});
 	});
 
 	// Process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile.ejs',
-		failureRedirect: '/signup.ejs',
+		successRedirect: '/profile',
+		failureRedirect: '/signup',
 		failureFlash: true // allow flash messages
 	}));
 
-	app.get('/profile', isLoggedIn, function(res, req) {
+	app.get('/profile', isLoggedIn, function(req, res) {
+		console.log('Render profile now');
 		res.render('profile.ejs', {
 			user: req.user
 		});
