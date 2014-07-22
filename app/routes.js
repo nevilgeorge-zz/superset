@@ -1,4 +1,7 @@
 // app.routes.js
+
+var User = require('../app/models/user.js');
+
 module.exports = function(app, passport) {
 
 	// Render the home page, index.ejs
@@ -32,12 +35,14 @@ module.exports = function(app, passport) {
 
 	app.get('/profile', isLoggedIn, function(req, res) {
 		console.log('Render profile now');
+		console.log(req.body.name);
+		console.log(req.name);
 		res.render('profile.ejs', {
 			user: req.user
 		});
 	});
 
-	app.get('/logout', function(res, req) {
+	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});

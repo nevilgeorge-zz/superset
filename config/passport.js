@@ -80,6 +80,8 @@ module.exports = function(passport) {
 			if (!user.validPassword(password)) {
 				return done(null, false, req.flash('loginMessage', 'incorrect password!'));
 			}
+			//console.log('From passport:');
+			//console.log(user);
 			return done(null, user);
 		});
 	}
