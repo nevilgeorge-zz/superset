@@ -34,9 +34,8 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get('/profile', isLoggedIn, function(req, res) {
-		console.log('Render profile now');
-		console.log(req.body.name);
-		console.log(req.name);
+		//console.log('Render profile now');
+		console.log(req.user);
 		res.render('profile.ejs', {
 			user: req.user
 		});
@@ -52,7 +51,6 @@ module.exports = function(app, passport) {
 var isLoggedIn = function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
-	} else {
-		res.redirect('/');
-	}
+	} 
+	res.redirect('/');
 }

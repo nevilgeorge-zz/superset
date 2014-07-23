@@ -82,6 +82,7 @@ module.exports = function(passport) {
 			}
 			//console.log('From passport:');
 			//console.log(user);
+			req.user = user;
 			return done(null, user);
 		});
 	}
