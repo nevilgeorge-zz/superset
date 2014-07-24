@@ -1,7 +1,5 @@
 // app.routes.js
 
-var User = require('../app/models/user.js');
-
 module.exports = function(app, passport) {
 
 	// Render the home page, index.ejs
@@ -23,7 +21,7 @@ module.exports = function(app, passport) {
 
 	// Render the signup page, signup.ejs
 	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage')});
+		res.render('signup.ejs', { message: req.flash('signupMessage') });
 	});
 
 	// Process the signup form
@@ -53,4 +51,4 @@ var isLoggedIn = function(req, res, next) {
 		return next();
 	} 
 	res.redirect('/');
-}
+};
