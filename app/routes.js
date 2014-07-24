@@ -38,6 +38,23 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// Route to get Facebook authentication
+	/*
+	The 'scope' is used to get extra information that isn't provided by default in the token
+	that is returned from Facebook. The token is an OAuth token, since Facebook authorization
+	uses OAuth 2.0.
+	 */
+	app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+	// Route after Facebook authorization/ OAuth token received
+	app.get('/auth/facebook/callback', 
+		passport.authenticate('facebook',
+			{ 
+				successRedirect: '/profile',
+				failureRedirect: '/'
+				//failureFlash: 'Facebook login not authorized!'
+		 }));
+
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');

@@ -2,8 +2,10 @@
 
 // load everything we need
 var LocalStrategy = require('passport-local').Strategy,
+	FacebookStrategy = require('passport-facebook').Strategy,
 	flash = require('connect-flash'),
-	User = require('../app/models/user.js');
+	User = require('../app/models/user.js'),
+	configAuth = require('./auth.js');
 
 module.exports = function(passport) {
 	// passport sessions set up. Required for login sessions.
@@ -83,6 +85,47 @@ module.exports = function(passport) {
 			}
 			req.user = user;
 			return done(null, user);
+		});
+	}
+	));
+
+	// Facebook login authorization
+	// From Passport-facebook documentation
+	passport.use(new FacebookStrategy({
+		// call values stored in auth.js
+		clientID: configAuth.facebookAuth.clientID,
+		clientSecret: configAuth.facebookAuth.clientSecret,
+		callbackURL: configAuth.facebookAuth.callbackURL
+	},
+	function(token, refreshToken, profile, done) {
+		process.nextTick(function() {
+			// find user based on Facebook login credentials
+			User.findOne({ 'facebook.id': profile.id }, function(err, user) {
+				// if error, throw error
+				if (err) {
+					return done(err);
+				}
+
+				// if the user exists, simply log them in
+				if (user) {
+					return done(null, user);
+				} else {
+					// if they aren't logged in, let's create a facebook account for them
+					var newUser = new User();
+					// set all the information required in the User model
+					newUser.facebook.id = profile.id;
+					newUser.facebook.token = token;
+					newUser.facebook.email = profile.emails[0].value;
+					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+
+					newUser.save(function(err) {
+						if (err) {
+							throw err;
+						}
+						return done(null, newUser);
+					});
+				}
+			});
 		});
 	}
 	));
