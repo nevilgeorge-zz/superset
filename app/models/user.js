@@ -1,4 +1,4 @@
-// app/models/user.js
+// app/models/user.js - User model schema
 // require modules we need in this file
 var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs');
@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var userSchema = mongoose.Schema({
 	local: {
 		email: String,
-		password: String
+		password: String,
+		name: String,
 	},
 	facebook: {
 		id: String,

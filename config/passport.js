@@ -40,7 +40,6 @@ module.exports = function(passport) {
 				if (err) {
 					return done(err);
 				}
-				// then, check to see if an email is already being used
 				if (user) {
 					return done(null, false, req.flash('signupMessage', 'Email already exists!'));
 				} else {
@@ -48,12 +47,14 @@ module.exports = function(passport) {
 					var newUser = new User();
 					newUser.local.email = email;
 					newUser.local.password = newUser.generateHash(password);
+					// Since we are using body-parser with JSON, POSTed variables can be accessed from req.body
+					newUser.local.name = req.body.name;
 
 					newUser.save(function(err) {
 						if (err) {
 							throw err;
 						}
-						return done(null, newUser);
+						return done(err, newUser);
 					});
 				}
 			});
@@ -80,8 +81,6 @@ module.exports = function(passport) {
 			if (!user.validPassword(password)) {
 				return done(null, false, req.flash('loginMessage', 'incorrect password!'));
 			}
-			//console.log('From passport:');
-			//console.log(user);
 			req.user = user;
 			return done(null, user);
 		});

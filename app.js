@@ -26,7 +26,8 @@ app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
 
 // Set up the app to use modules when needed
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(flash());
 app.use(morgan('dev'));
 app.use(cookieParser());

@@ -1,4 +1,5 @@
 // app.routes.js
+var User = require('../app/models/user.js');
 
 module.exports = function(app, passport) {
 
@@ -32,8 +33,6 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get('/profile', isLoggedIn, function(req, res) {
-		//console.log('Render profile now');
-		console.log(req.user);
 		res.render('profile.ejs', {
 			user: req.user
 		});
