@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
 			{ 
 				successRedirect: '/profile',
 				failureRedirect: '/'
-				//failureFlash: 'Facebook login not authorized!'
+				failureFlash: 'Facebook login not authorized!'
 		 }));
 
 	app.get('/logout', function(req, res) {
