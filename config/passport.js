@@ -119,6 +119,7 @@ module.exports = function(passport) {
 					newUser.facebook.token = token;
 					newUser.facebook.email = profile.emails[0].value;
 					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+					newUser.facebook.displayPictureURL = profile.photos[0].value;
 
 					newUser.save(function(err) {
 						if (err) {
