@@ -24,6 +24,8 @@ require('./config/passport.js')(passport);
 // set up ejs for templating
 app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
+app.use('/assets', express.static(__dirname + '/views/assets'));
+app.use('/includes', express.static(__dirname + '/views/includes'));
 
 // Set up the app to use modules when needed
 app.use(bodyParser.json());

@@ -1,41 +1,79 @@
 <!-- views/profile.ejs -->
-<!doctype html>
+<!DOCTYPE html>
+
 <html>
-<head>
-	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
-	</style>
-</head>
-<body>
-<div class="container">
+	<head>
+		<title>Superset</title>
+		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<script>
+		$(function() {
+			$('#header').load('includes/header.html');
+		});
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="assets/js/script.js"></script>
+	</head>
 
-	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-	</div>
+	<body>
+		<div id="header"></div>
 
-	<div class="row">
+		<div class="wrapper">
+			<div class="content" id="Profile">
 
-		<!-- LOCAL INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
+				<section id="profile-heading">
+					<div>
+						<img src="assets/img/nevil-prof.jpg">
+						<h1><%= user.facebook.name %></h1>
+						<ul>
+							<li>
+								<h4>Age:</h4>
+								<span>20</span>
+							</li>
+							<li>
+								<h4>Weight:</h4>
+								<span>150 lbs</span>
+							</li>
+						</ul>
+					</div>
+				</section>
 
-					<p>
-						<strong>Welcome home, <%= user.facebook.name %></strong><br>
-						<strong>id</strong>: <%= user.facebook.id %><br>
-						<strong>email</strong>: <%= user.facebook.email %><br>
-						<strong>token</strong>: <%= user.facebook.token %>
-					</p>
+				<section id="profile-workouts">
+					<div>
+						<h2>Workouts</h2>
+						<table>
+							<tr>
+								<td>
+									<h4>Legs</h4>
+									<a href="#">Details <i class="fa fa-arrow-up"></i></a>
+								</td>
+								<td>
+									<h4>Shoulders &amp; Abs</h4>
+									<a href="#">Details <i class="fa fa-arrow-up"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Chest &amp; Triceps</h4>
+									<a href="#">Details <i class="fa fa-arrow-up"></i></a>
+								</td>
+								<td>
+									<h4>Back &amp; Biceps</h4>
+									<a href="#">Details <i class="fa fa-arrow-down"></i></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+
+				<section id="profile-progress">
+					<div>
+						<h2>Progress</h2>
+						<img src="assets/img/profile-graph.jpg">
+					</div>
+				</section>
 
 			</div>
 		</div>
-
-	</div>
-
-</div>
-</body>
+	</body>
 </html>

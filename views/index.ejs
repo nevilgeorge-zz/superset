@@ -1,28 +1,36 @@
 <!-- views/index.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 
 <html>
-<head>
-	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-	<style>
-		body 		{ padding-top:80px; }
-	</style>
-</head>
-<body>
-<div class="container">
+	<head>
+		<title>Superset</title>
+		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<script>
+		$(function() {
+			$('#header').load('includes/header.html');
+		});
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="assets/js/script.js"></script>
+	</head>
 
-	<div class="jumbotron text-center">
-		<h1><span class="fa fa-lock"></span> Node Authentication</h1>
+	<body>
+		<div id="header"></div>
 
-		<p>Login or Register with:</p>
+		<div class="wrapper">
+			<div class="content" id="Log-In">
 
-		<a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-		<a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-		<a href="/auth/facebook" class="btn btn-default" class="fa fa-facebook"></span> Facebook</a>
-	</div>
-
-</div>
-</body>
-</html>
+				<section id="login">
+					<h1>Superset</h1>
+					<form action="/login" method="post">
+						<input type="text" name="email" placeholder="Email">
+						<input type="password" name="password" placeholder="Password">
+						<input type="submit" value="Log in">
+					</form>
+					<a href="/signup">Don't have an account yet?</a>
+				</section>
+				
+			</div>
+		</div>
+	</body>

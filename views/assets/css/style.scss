@@ -1,0 +1,347 @@
+/* Globals, templating */
+$color1: #e1e6fa;
+$color2: #c4d7ed;
+$color3: #abc8e2;
+$color4: #375d81;
+$color5: #183152;
+
+@font-face {
+	font-family: "Vincent";
+	src: url("../fonts/Vincent-Regular.otf");
+}
+
+html, body, div, span, h1, h2, h3, h4,
+h5, h6, p, a, img, i, ol, ul, li, form,
+label, table, caption, {
+	margin: 0;
+	padding: 0;
+}
+html {
+	font-family: "Lucida Grande";
+
+	.wrapper {
+		width: 100%;
+		background-color: $color1;
+
+		.content {
+			padding-top: 44px;
+			width: 100%;
+		}
+	}
+}
+
+
+
+/* Header */
+header {
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	background-color: $color2;
+
+	> nav {
+		margin: 0 auto;
+		padding: 7px 0;
+		width: 90%;
+		overflow: auto;
+
+		> a {
+			float: left;
+			text-decoration: none;
+		}
+		.back {
+			display: none;
+
+			i {
+				padding: 0 20px 0 0;
+				font-size: 30px;
+				color: $color5;
+			}
+		}
+		.logo {
+
+			h1 {
+				vertical-align: text-top;
+				font-family: 'Vincent';
+				font-size: 35px;
+				line-height: 26px;
+				color: $color5;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+			}
+		}
+		> i {
+			float: right;
+			font-size: 30px;
+			color: $color5;
+			cursor: pointer;
+		}
+		> nav {
+			display: none;
+			clear: both;
+			padding: 7px 0 0 0;
+			width: 100%;
+			text-align: right;
+
+			ul {
+
+				li {
+					padding: 8px 0;
+					height: 21px;
+					display: block;
+					font-family: "Lucida Grande";
+
+					a {
+						float: right;
+						color: $color4;
+						text-decoration: none;
+
+						i {
+							margin: 0 10px 0 0;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+
+
+
+/* Log In */
+#Log-In.content {
+
+	#login {
+		padding: 111px 0 156px 0;
+		text-align: center;
+
+		h1 {
+			margin: 0 0 20px 0;
+			font-family: "Vincent";
+			font-size: 60px;
+			color: $color5;
+			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+		}
+		form {
+			margin: 0 auto 15px auto;
+			width: 250px;
+
+			input {
+				display: block;
+				width: 100%;
+				height: 40px;
+				text-align: center;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				font-size: 15px;
+				color: $color4;
+				background-color: $color3;
+				border: none;
+			}
+			input:nth-child(1) {
+				border-bottom: 1px solid $color1;
+				border-top-left-radius: 4px;
+				border-top-right-radius: 4px;
+			}
+			input:nth-child(2) {
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+			}
+			input:last-child {
+				margin: 10px 0 0 0;
+				background-color: $color4;
+				border-radius: 4px;
+				color: $color1;
+			}
+		}
+		a {
+			font-family: "Lucida Grande";
+			text-decoration: none;
+			color: $color4;
+		}
+	}
+}
+
+
+
+/* Sign up */
+#Sign-Up.content {
+
+	#signup {
+		padding: 106px 0 125px 0;
+		text-align: center;
+
+		button {
+			width: 250px;
+			height: 40px;
+			font-size: 15px;
+			color: #ffffff;
+			background-color: #3b5b95;
+			border: none;
+			border-radius: 4px;
+
+			i {
+				padding: 0 10px 0 0;
+			}
+		}
+		h3 {
+			margin: 10px 0;
+			font-family: "Lucida Grande";
+			color: $color4;
+			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+		}
+		form {
+			margin: 0 auto;
+			width: 250px;
+
+			input {
+				display: block;
+				width: 100%;
+				height: 40px;
+				text-align: center;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				font-size: 15px;
+				color: $color4;
+				background-color: $color3;
+				border: none;
+			}
+			input:nth-child(1) {
+				border-bottom: 1px solid $color1;
+				border-top-left-radius: 4px;
+				border-top-right-radius: 4px;
+			}
+			input:nth-child(2) {
+				border-bottom: 1px solid $color1;
+			}
+			input:nth-child(3) {
+				border-bottom: 1px solid $color1;
+			}
+			input:nth-child(4) {
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+			}
+			input:last-child {
+				margin: 10px 0 0 0;
+				background-color: $color4;
+				border-radius: 4px;
+				color: $color1;
+			}
+		}
+	}
+}
+
+
+
+/* Profile */
+#Profile.content {
+
+	#profile-heading {
+		padding: 20px 0 105px 0;
+		background-color: $color5;
+
+		div {
+			margin: 0 auto;
+			width: 90%;
+
+			img {
+				float: left;
+				width: 120px;
+			}
+			h1 {
+				float: right;
+				text-align: left;
+				width: calc(100% - 120px - 20px);
+				font-size: 20px;
+				color: $color3;
+			}
+			ul {
+				float: right;
+				text-align: left;
+				width: calc(100% - 120px - 20px);
+				list-style: none;
+
+				li {
+
+					h4 {
+						display: inline-block;
+						font-size: 15px;
+						color: $color1;
+					}
+					span {
+						font-size: 12px;
+						color: $color3;
+					}
+				}
+			}
+		}
+	}
+	#profile-workouts {
+		padding: 30px 0 10px 0;
+		background-color: $color1;
+
+		div {
+			margin: 0 auto;
+			width: 90%;
+
+			h2 {
+				color: $color5;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+			}
+			table {
+				width: 100%;
+				border-spacing: 10px;
+
+				tr {
+					width: 100%;
+
+					td {
+						padding: 5px;
+						height: 50px;
+						background-color: $color2;
+						border-radius: 4px;
+						box-shadow: 1px 1px 0 #aaa;
+
+						h4 {
+							font-size: 13px;
+							color: $color4;
+						}
+						a {
+							font-size: 13px;
+							color: $color4;
+							text-decoration: none;
+
+							.fa-arrow-up {
+								color: #19bf46;
+							}
+							.fa-arrow-down {
+								color: #ff2c26;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#profile-progress {
+		background-color: $color4;
+
+		div {
+			margin: 0 auto;
+			width: 90%;
+
+			h2 {
+				padding: 15px 0 0 0;
+				color: $color1;
+				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+			}
+			img {
+				margin: 10px 0 0 0;
+				width: 100%;
+			}
+		}
+	}
+}
+

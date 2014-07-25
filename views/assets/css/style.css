@@ -1,0 +1,233 @@
+/* Globals, templating */
+@font-face {
+  font-family: "Vincent";
+  src: url("../fonts/Vincent-Regular.otf"); }
+html, body, div, span, h1, h2, h3, h4,
+h5, h6, p, a, img, i, ol, ul, li, form,
+label, table, caption {
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-family: "Lucida Grande"; }
+  html .wrapper {
+    width: 100%;
+    background-color: #e1e6fa; }
+    html .wrapper .content {
+      padding-top: 44px;
+      width: 100%; }
+
+/* Header */
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: #c4d7ed; }
+  header > nav {
+    margin: 0 auto;
+    padding: 7px 0;
+    width: 90%;
+    overflow: auto; }
+    header > nav > a {
+      float: left;
+      text-decoration: none; }
+    header > nav .back {
+      display: none; }
+      header > nav .back i {
+        padding: 0 20px 0 0;
+        font-size: 30px;
+        color: #183152; }
+    header > nav .logo h1 {
+      vertical-align: text-top;
+      font-family: 'Vincent';
+      font-size: 35px;
+      line-height: 26px;
+      color: #183152;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+    header > nav > i {
+      float: right;
+      font-size: 30px;
+      color: #183152;
+      cursor: pointer; }
+    header > nav > nav {
+      display: none;
+      clear: both;
+      padding: 7px 0 0 0;
+      width: 100%;
+      text-align: right; }
+      header > nav > nav ul li {
+        padding: 8px 0;
+        height: 21px;
+        display: block;
+        font-family: "Lucida Grande"; }
+        header > nav > nav ul li a {
+          float: right;
+          color: #375d81;
+          text-decoration: none; }
+          header > nav > nav ul li a i {
+            margin: 0 10px 0 0; }
+
+/* Log In */
+#Log-In.content #login {
+  padding: 111px 0 156px 0;
+  text-align: center; }
+  #Log-In.content #login h1 {
+    margin: 0 0 20px 0;
+    font-family: "Vincent";
+    font-size: 60px;
+    color: #183152;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+  #Log-In.content #login form {
+    margin: 0 auto 15px auto;
+    width: 250px; }
+    #Log-In.content #login form input {
+      display: block;
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      font-size: 15px;
+      color: #375d81;
+      background-color: #abc8e2;
+      border: none; }
+    #Log-In.content #login form input:nth-child(1) {
+      border-bottom: 1px solid #e1e6fa;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px; }
+    #Log-In.content #login form input:nth-child(2) {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px; }
+    #Log-In.content #login form input:last-child {
+      margin: 10px 0 0 0;
+      background-color: #375d81;
+      border-radius: 4px;
+      color: #e1e6fa; }
+  #Log-In.content #login a {
+    font-family: "Lucida Grande";
+    text-decoration: none;
+    color: #375d81; }
+
+/* Sign up */
+#Sign-Up.content #signup {
+  padding: 106px 0 125px 0;
+  text-align: center; }
+  #Sign-Up.content #signup button {
+    width: 250px;
+    height: 40px;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #3b5b95;
+    border: none;
+    border-radius: 4px; }
+    #Sign-Up.content #signup button i {
+      padding: 0 10px 0 0; }
+  #Sign-Up.content #signup h3 {
+    margin: 10px 0;
+    font-family: "Lucida Grande";
+    color: #375d81;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+  #Sign-Up.content #signup form {
+    margin: 0 auto;
+    width: 250px; }
+    #Sign-Up.content #signup form input {
+      display: block;
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      font-size: 15px;
+      color: #375d81;
+      background-color: #abc8e2;
+      border: none; }
+    #Sign-Up.content #signup form input:nth-child(1) {
+      border-bottom: 1px solid #e1e6fa;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px; }
+    #Sign-Up.content #signup form input:nth-child(2) {
+      border-bottom: 1px solid #e1e6fa; }
+    #Sign-Up.content #signup form input:nth-child(3) {
+      border-bottom: 1px solid #e1e6fa; }
+    #Sign-Up.content #signup form input:nth-child(4) {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px; }
+    #Sign-Up.content #signup form input:last-child {
+      margin: 10px 0 0 0;
+      background-color: #375d81;
+      border-radius: 4px;
+      color: #e1e6fa; }
+
+/* Profile */
+#Profile.content #profile-heading {
+  padding: 20px 0 105px 0;
+  background-color: #183152; }
+  #Profile.content #profile-heading div {
+    margin: 0 auto;
+    width: 90%; }
+    #Profile.content #profile-heading div img {
+      float: left;
+      width: 120px; }
+    #Profile.content #profile-heading div h1 {
+      float: right;
+      text-align: left;
+      width: calc(100% - 120px - 20px);
+      font-size: 20px;
+      color: #abc8e2; }
+    #Profile.content #profile-heading div ul {
+      float: right;
+      text-align: left;
+      width: calc(100% - 120px - 20px);
+      list-style: none; }
+      #Profile.content #profile-heading div ul li h4 {
+        display: inline-block;
+        font-size: 15px;
+        color: #e1e6fa; }
+      #Profile.content #profile-heading div ul li span {
+        font-size: 12px;
+        color: #abc8e2; }
+#Profile.content #profile-workouts {
+  padding: 30px 0 10px 0;
+  background-color: #e1e6fa; }
+  #Profile.content #profile-workouts div {
+    margin: 0 auto;
+    width: 90%; }
+    #Profile.content #profile-workouts div h2 {
+      color: #183152;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+    #Profile.content #profile-workouts div table {
+      width: 100%;
+      border-spacing: 10px; }
+      #Profile.content #profile-workouts div table tr {
+        width: 100%; }
+        #Profile.content #profile-workouts div table tr td {
+          padding: 5px;
+          height: 50px;
+          background-color: #c4d7ed;
+          border-radius: 4px;
+          box-shadow: 1px 1px 0 #aaa; }
+          #Profile.content #profile-workouts div table tr td h4 {
+            font-size: 13px;
+            color: #375d81; }
+          #Profile.content #profile-workouts div table tr td a {
+            font-size: 13px;
+            color: #375d81;
+            text-decoration: none; }
+            #Profile.content #profile-workouts div table tr td a .fa-arrow-up {
+              color: #19bf46; }
+            #Profile.content #profile-workouts div table tr td a .fa-arrow-down {
+              color: #ff2c26; }
+#Profile.content #profile-progress {
+  background-color: #375d81; }
+  #Profile.content #profile-progress div {
+    margin: 0 auto;
+    width: 90%; }
+    #Profile.content #profile-progress div h2 {
+      padding: 15px 0 0 0;
+      color: #e1e6fa;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); }
+    #Profile.content #profile-progress div img {
+      margin: 10px 0 0 0;
+      width: 100%; }
