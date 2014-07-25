@@ -23,6 +23,7 @@ require('./config/passport.js')(passport);
 
 // set up ejs for templating
 app.set('view engine', 'ejs');
+// include all the files that aren't just in the root folder
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/includes', express.static(__dirname + '/views/includes'));

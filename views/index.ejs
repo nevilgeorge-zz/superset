@@ -21,6 +21,10 @@
 		<div class="wrapper">
 			<div class="content" id="Log-In">
 
+				<% if (message.length) { %>
+					<div class="alert"><%= message %></div>
+				<% } %>
+				
 				<section id="login">
 					<h1>Superset</h1>
 					<form action="/login" method="post">

@@ -47,6 +47,7 @@ module.exports = function(passport) {
 				} else {
 					// create the user
 					var newUser = new User();
+					newUser.authType = 'local';
 					newUser.local.email = email;
 					newUser.local.password = newUser.generateHash(password);
 					// Since we are using body-parser with JSON, POSTed variables can be accessed from req.body
@@ -56,6 +57,7 @@ module.exports = function(passport) {
 						if (err) {
 							throw err;
 						}
+						console.log(newUser.authType);
 						return done(err, newUser);
 					});
 				}
@@ -77,11 +79,11 @@ module.exports = function(passport) {
 			}
 
 			if (!user) {
-				return done(null, false, req.flash('loginMessage', 'incorrect username!'));
+				return done(null, false, req.flash('loginMessage', 'Incorrect username!'));
 			}
 
 			if (!user.validPassword(password)) {
-				return done(null, false, req.flash('loginMessage', 'incorrect password!'));
+				return done(null, false, req.flash('loginMessage', 'Incorrect password!'));
 			}
 			req.user = user;
 			return done(null, user);
@@ -90,7 +92,7 @@ module.exports = function(passport) {
 	));
 
 	// Facebook login authorization
-	// From Passport-facebook documentation
+	// From Passport-facebook documentaiton
 	passport.use(new FacebookStrategy({
 		// call values stored in auth.js
 		clientID: configAuth.facebookAuth.clientID,

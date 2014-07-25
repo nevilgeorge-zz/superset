@@ -3,20 +3,15 @@ var User = require('../app/models/user.js');
 
 module.exports = function(app, passport) {
 
-	// Render the home page, index.ejs
+	// Render the home and login page, index.ejs
 	app.get('/', function(req, res) {
-		res.render('index.ejs');
-	});
-
-	// Render the login page, login.ejs
-	app.get('/login', function(req, res) {
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('index.ejs', { message: req.flash('loginMessage')});
 	});
 
 	// Process the login form
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/profile',
-		failureRedirect: '/login',
+		failureRedirect: '/',
 		failureFlash: true // allow flash messages
 	}));
 
