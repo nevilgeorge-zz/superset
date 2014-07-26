@@ -57,7 +57,6 @@ module.exports = function(passport) {
 						if (err) {
 							throw err;
 						}
-						console.log(newUser.authType);
 						return done(err, newUser);
 					});
 				}
@@ -114,12 +113,14 @@ module.exports = function(passport) {
 				} else {
 					// if they aren't logged in, let's create a facebook account for them
 					var newUser = new User();
+					// pass in the form of authentication for this user
+					newUser.authType = 'facebook'
 					// set all the information required in the User model
 					newUser.facebook.id = profile.id;
 					newUser.facebook.token = token;
 					newUser.facebook.email = profile.emails[0].value;
 					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-					newUser.facebook.displayPictureURL = profile.photos[0].value;
+					//newUser.facebook.displayPictureURL = profile.photos[0].value;
 
 					newUser.save(function(err) {
 						if (err) {

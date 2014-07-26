@@ -19,7 +19,7 @@
 				<section id="profile-heading">
 					<div>
 						<img src="assets/img/nevil-prof.jpg">
-						<% if (user.authType != 'local') { %>
+						<% if (user.authType == 'local') { %>
 							<h1><%= user.local.name %></h1>
 						<% } else { %>
 							<h1><%= user.facebook.name %></h1>
