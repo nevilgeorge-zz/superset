@@ -8,11 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script>
-		$(function() {
-			$('#header').load('includes/header.html');
-		});
-		</script>
 		<script src="assets/js/script.js"></script>
 	</head>
 
@@ -33,7 +28,7 @@
 					<form action="/signup" method="post">
 						<input type="text" name="name" placeholder="Your name">
 						<input type="text" name="email" placeholder="Email">
-						<input type="password" name="password" placeholder="Password">
+						<input id="password" type="password" name="password" placeholder="Password">
 						<input type="password" name="password-confirm" placeholder="Password, one more time">
 						<input type="submit" value="Sign up">
 					</form>
@@ -41,5 +36,14 @@
 
 			</div>
 		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#header').load('includes/header.html');
+			});
+			// var password = $('#password').val();
+			// if (password.length < 8) {
+
+			// }
+		</script>
 	</body>
 </html>
