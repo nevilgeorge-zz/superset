@@ -5,7 +5,8 @@ var LocalStrategy = require('passport-local').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy,
 	flash = require('connect-flash'),
 	User = require('../app/models/user.js'),
-	configAuth = require('./auth.js');
+	configAuth = require('./auth.js'),
+	fb = require('fb');
 
 module.exports = function(passport) {
 	// passport sessions set up. Required for login sessions.
@@ -96,12 +97,14 @@ module.exports = function(passport) {
 		// call values stored in auth.js
 		clientID: configAuth.facebookAuth.clientID,
 		clientSecret: configAuth.facebookAuth.clientSecret,
-		callbackURL: configAuth.facebookAuth.callbackURL
+		callbackURL: configAuth.facebookAuth.callbackURL,
+		passReqToCallback: true
 	},
-	function(token, refreshToken, profile, done) {
+	function(req, token, refreshToken, profile, done) {
 		process.nextTick(function() {
 			// find user based on Facebook login credentials
 			User.findOne({ 'facebook.id': profile.id }, function(err, user) {
+				var profPic, birthday;
 				// if error, throw error
 				if (err) {
 					return done(err);
@@ -119,15 +122,31 @@ module.exports = function(passport) {
 					newUser.facebook.id = profile.id;
 					newUser.facebook.token = token;
 					newUser.facebook.email = profile.emails[0].value;
+					newUser.facebook.firstName = profile.name.givenName;
+					newUser.facebook.lastName = profile.name.familyName;
 					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-					//newUser.facebook.displayPictureURL = profile.photos[0].value;
 
-					newUser.save(function(err) {
-						if (err) {
-							throw err;
+					// pull data from Facebook using the API
+					fb.setAccessToken(token);
+
+					fb.api('fql', { q: 'SELECT birthday, pic_big FROM user WHERE uid=' + profile.id }, function(response) {
+						if (!response || response.error) {
+							console.log(!response ? 'error occurred' : response.error);
+							return;
 						}
-						return done(null, newUser);
+						console.log(response.data[0].pic_big);
+						console.log(response.data[0].birthday);
+						newUser.facebook.profilePicture = response.data[0].pic_big;
+						newUser.facebook.birthday = response.data[0].birthday;
+
+						newUser.save(function(err) {
+							if (err) {
+								throw err;
+							}
+							return done(null, newUser);
+						});
 					});
+					
 				}
 			});
 		});

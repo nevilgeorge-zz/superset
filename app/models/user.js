@@ -14,8 +14,11 @@ var userSchema = mongoose.Schema({
 		id: String,
 		token: String,
 		email: String,
+		firstName: String,
+		lastName: String,
 		name: String,
-		displayPictureURL: String
+		birthday: String,
+		profilePicture: String
 	}
 });
 
