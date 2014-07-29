@@ -29,10 +29,10 @@
 					<h3>Or</h3>
 					<form action="/signup" method="post">
 						<input type="text" name="name" placeholder="Your name">
-						<input type="text" name="email" placeholder="Email">
+						<input id="email" type="text" name="email" placeholder="Email">
 						<input id="password" type="password" name="password" placeholder="Password">
 						<input id="password-confirm" type="password" name="password-confirm" placeholder="Password, one more time">
-						<input type="submit" value="Sign up">
+						<input id="submit" type="submit" value="Sign up" disabled="true">
 					</form>
 				</section>
 
@@ -44,15 +44,26 @@
 				$('#header').load('includes/header.html');
 			});
 
-
-			var password = $('#password').val(),
+			var email = $('#email').val(),
+				emailExp = /^(\w+([-_.]?\w+)*@\w+([-_.]?\w+)*(.\w{2,3})+)$/;
+				password = $('#password').val(),
 				passwordConfirm = $('#password-confirm').val();
+
+			// check if a valid email is entered
+			if (!emailExp.test(email)) {
+				$('#email-error').show();
+				$('#email-error').val('Invalid email entered.');
+			} else {
+				$('#email-error').val('');
+				$('#email-error').hide();
+			}
+
 			// check if the password meets the minimum size
 			if (password.length < 8) {
 				$('#password-error').show();
 				$('#password-error').val('Password must be at least 8 characters long.');
 			} else {
-				// hide div if no error
+				// hide error div if no error
 				$('#password-error').val('');
 				$('#password-error').hide();
 			}
@@ -65,6 +76,7 @@
 				$('#password-confirm-error').val('Password match.');
 				$('#password-confirm-error').css('background-color', 'green');
 			}
+
 		</script>
 	</body>
 </html>

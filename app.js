@@ -35,7 +35,6 @@ app.use(flash());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({ secret: 'nevilandjonmakeanapp'}));
-app.use
 app.use(passport.initialize());
 app.use(passport.session());
 
