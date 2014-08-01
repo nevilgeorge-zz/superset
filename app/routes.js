@@ -27,8 +27,20 @@ module.exports = function(app, passport) {
 		failureFlash: true // allow flash messages
 	}));
 
-	app.get('/profile', isLoggedIn, function(req, res) {
+	app.param('email', function(req, res, next, email) {
+		User.findOne({'local.email': email}, function(err, user){
+			if (err) {
+				next(err);
+			} else if (user) {
+				req.user = user;
+				next();
+			} else {
+				next(new Error('failed to load user'));
+			}
+		});
+	});
 
+	app.get('/profile/:email', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user: req.user
 		});
@@ -54,6 +66,7 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+
 };
 
 // route middleware to make sure user is logged in
