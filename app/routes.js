@@ -27,6 +27,7 @@ module.exports = function(app, passport) {
 		failureFlash: true // allow flash messages
 	}));
 
+	// doesn't do anything yet
 	app.param('email', function(req, res, next, email) {
 		User.findOne({'local.email': email}, function(err, user){
 			if (err) {
