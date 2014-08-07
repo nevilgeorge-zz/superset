@@ -21,10 +21,10 @@ html {
 
 	.wrapper {
 		width: 100%;
-		background-color: $color1;
+		background: url(../img/patterns/white_carbon/white_carbon.png);
 
-		.content {
-			padding-top: 44px;
+		main {
+			padding-top: 45px;
 			width: 100%;
 		}
 	}
@@ -37,7 +37,7 @@ header {
 	position: fixed;
 	width: 100%;
 	z-index: 1000;
-	background-color: $color2;
+	border-bottom: 1px solid #aaa;
 
 	> nav {
 		margin: 0 auto;
@@ -65,14 +65,14 @@ header {
 				font-family: 'Vincent';
 				font-size: 35px;
 				line-height: 26px;
-				color: $color5;
-				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+				color: #bbb;
+				text-shadow: 0 1px 0 #fff;
 			}
 		}
 		> i {
 			float: right;
 			font-size: 30px;
-			color: $color5;
+			color: $color4;
 			cursor: pointer;
 		}
 		> nav {
@@ -112,18 +112,22 @@ header {
 #Log-In.content {
 
 	#login {
-		padding: 111px 0 156px 0;
+		padding: 90px 0 130px 0;
 		text-align: center;
 
 		h1 {
 			margin: 0 0 20px 0;
 			font-family: "Vincent";
 			font-size: 60px;
-			color: $color5;
-			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+			color: #bbb;
+			text-shadow: 0 1px 0 #fff;
+		}
+		.alert {
+			padding: 0 0 15px 0;
+			color: #FF583A;
 		}
 		form {
-			margin: 0 auto 15px auto;
+			margin: 0 auto;
 			width: 250px;
 
 			input {
@@ -136,23 +140,43 @@ header {
 				box-sizing: border-box;
 				font-size: 15px;
 				color: $color4;
-				background-color: $color3;
+				background: url(../img/patterns/white_carbon/white_carbon.png);
 				border: none;
 			}
 			input:nth-child(1) {
-				border-bottom: 1px solid $color1;
+				border: 1px solid #ccc;
 				border-top-left-radius: 4px;
 				border-top-right-radius: 4px;
 			}
 			input:nth-child(2) {
+				border: 1px solid #ccc;
+				border-top: none;
 				border-bottom-left-radius: 4px;
 				border-bottom-right-radius: 4px;
 			}
 			input:last-child {
 				margin: 10px 0 0 0;
+				color: $color1;
+				background: none;
 				background-color: $color4;
 				border-radius: 4px;
-				color: $color1;
+				cursor: pointer;
+			}
+		}
+		button {
+			display: block;
+			margin: 5px auto 15px auto;
+			width: 250px;
+			height: 40px;
+			font-size: 15px;
+			color: #ffffff;
+			background-color: #3b5b95;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+
+			i {
+				padding: 0 10px 0 0;
 			}
 		}
 		a {
@@ -169,10 +193,11 @@ header {
 #Sign-Up.content {
 
 	#signup {
-		padding: 106px 0 125px 0;
+		padding: 85px 0 99px 0;
 		text-align: center;
 
 		button {
+			margin: 7px 0;
 			width: 250px;
 			height: 40px;
 			font-size: 15px;
@@ -180,6 +205,7 @@ header {
 			background-color: #3b5b95;
 			border: none;
 			border-radius: 4px;
+			cursor: pointer;
 
 			i {
 				padding: 0 10px 0 0;
@@ -189,7 +215,10 @@ header {
 			margin: 10px 0;
 			font-family: "Lucida Grande";
 			color: $color4;
-			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+		}
+		.alert {
+			padding: 0 0 15px 0;
+			color: #FF583A;
 		}
 		form {
 			margin: 0 auto;
@@ -205,29 +234,32 @@ header {
 				box-sizing: border-box;
 				font-size: 15px;
 				color: $color4;
-				background-color: $color3;
-				border: none;
+				background: url(../img/patterns/white_carbon/white_carbon.png);
+				border: 1px solid #bbb;
 			}
 			input:nth-child(1) {
-				border-bottom: 1px solid $color1;
 				border-top-left-radius: 4px;
 				border-top-right-radius: 4px;
 			}
 			input:nth-child(2) {
-				border-bottom: 1px solid $color1;
+				border-top: none;
 			}
 			input:nth-child(3) {
-				border-bottom: 1px solid $color1;
+				border-top: none;
 			}
 			input:nth-child(4) {
+				border-top: none;
 				border-bottom-left-radius: 4px;
 				border-bottom-right-radius: 4px;
 			}
-			input:last-child {
+			input:nth-child(5) {
 				margin: 10px 0 0 0;
-				background-color: $color4;
-				border-radius: 4px;
 				color: $color1;
+				background: none;
+				background-color: $color4;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
 			}
 		}
 	}

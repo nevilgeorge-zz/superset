@@ -1,8 +1,12 @@
-// app/models/user.js - User model schema
-// require modules we need in this file
+/*
+user.js - User model schema
+*/
+
+// Include necessary modules
 var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs');
 
+// Define User schema
 var userSchema = mongoose.Schema({
 	authType: String,
 	local: {
@@ -22,15 +26,16 @@ var userSchema = mongoose.Schema({
 	}
 });
 
-// methods:
-// hashing the password before storing it in the database
+
+// Encrypts password
 userSchema.methods.generateHash = function(password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// checking if password is valid
+// Checks password
 userSchema.methods.validPassword = function(password) {
 	return bcrypt.compareSync(password, this.local.password);
 };
 
+// Export User schema
 module.exports = mongoose.model('User', userSchema);

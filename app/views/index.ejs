@@ -2,40 +2,31 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<title>Superset</title>
-		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="assets/js/script.js"></script>
-	</head>
+	
+	<% include includes/head.html %>
 
 	<body>
-		<div id="header"></div>
+		
+		<% include includes/header.html %>
 
 		<div class="wrapper">
-			<div class="content" id="Log-In">
-
-				<% if (message.length) { %>
-					<div class="alert"><%= message %></div>
-				<% } %>
+			<main class="content" id="Log-In">
 				
 				<section id="login">
 					<h1>Superset</h1>
+					<% if (message.length) { %>
+						<div class="alert"><%= message %></div>
+					<% } %>
 					<form action="/login" method="post">
 						<input type="text" name="email" placeholder="Email">
 						<input type="password" name="password" placeholder="Password">
 						<input type="submit" value="Log in">
 					</form>
+					<button type="submit"><i class="fa fa-facebook"></i>Log in with Facebook</button>
 					<a href="/signup">Don't have an account yet?</a>
 				</section>
 				
-			</div>
+			</main>
 		</div>
-		<script type="text/javascript">
-			$(function() {
-				$('#header').load('includes/header.html');
-			});
-		</script>
 	</body>
 </html>

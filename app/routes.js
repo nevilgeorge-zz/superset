@@ -1,33 +1,37 @@
-// app.routes.js
+/*
+app.routes.js - Handles app routing
+*/
+
+// Include User schema
 var User = require('../app/models/user.js');
 
 module.exports = function(app, passport) {
 
-	// Render the home and login page, index.ejs
+	// Render login page
 	app.get('/', function(req, res) {
 		res.render('index.ejs', { message: req.flash('loginMessage')});
 	});
 
-	// Process the login form
+	// Process login form
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/profile',
 		failureRedirect: '/',
 		failureFlash: true // allow flash messages
 	}));
 
-	// Render the signup page, signup.ejs
+	// Render signup page
 	app.get('/signup', function(req, res) {
 		res.render('signup.ejs', { message: req.flash('signupMessage') });
 	});
 
-	// Process the signup form
+	// Process signup form
 	app.post('/signup', passport.authenticate('local-signup', {
 		successRedirect: '/profile',
 		failureRedirect: '/signup',
 		failureFlash: true // allow flash messages
 	}));
 
-	// doesn't do anything yet
+	// Doesn't do anything yet
 	app.param('email', function(req, res, next, email) {
 		User.findOne({'local.email': email}, function(err, user){
 			if (err) {
@@ -41,6 +45,7 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// Render profile page
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user: req.user
@@ -63,6 +68,7 @@ module.exports = function(app, passport) {
 				failureRedirect: '/'
 		 }));
 
+	// Facilitate log out functionality
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -70,7 +76,7 @@ module.exports = function(app, passport) {
 
 };
 
-// route middleware to make sure user is logged in
+// Route middleware, makes sure user is logged in
 var isLoggedIn = function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();

@@ -3,30 +3,22 @@
 
 <html>
 	
-	<head>
-		<title>Superset</title>
-		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="assets/js/script.js"></script>
-	</head>
+	<% include includes/head.html %>
 
 	<body>
-		<div id="header"></div>
+		
+		<% include includes/header.html %>
 
 		<div class="wrapper">
-			<div class="content" id="Sign-Up">
-
-				<% if (message.length) { %>
-					<div class="alert"><%= message %></div>
-				<% } %>
+			<main class="content" id="Sign-Up">
 
 				<!-- SIGNUP FORM -->
 				<section id="signup">
-					<form action="/auth/facebook">
-						<input type="submit" class="fa fa-facebook" value="Connect with Facebook"</button>
-					</form>
+					<button type="submit"><i class="fa fa-facebook"></i>Connect with Facebook</button>
 					<h3>Or</h3>
+					<% if (message.length) { %>
+						<div class="alert"><%= message %></div>
+					<% } %>
 					<form action="/signup" method="post">
 						<input type="text" name="name" placeholder="Your name">
 						<input id="email" type="text" name="email" placeholder="Email">
@@ -36,47 +28,8 @@
 					</form>
 				</section>
 
-			</div>
+			</main>
 		</div>
-		<script type="text/javascript">
-			// loading the header for every page
-			$(function() {
-				$('#header').load('includes/header.html');
-			});
 
-			var email = $('#email').val(),
-				emailExp = /^(\w+([-_.]?\w+)*@\w+([-_.]?\w+)*(.\w{2,3})+)$/;
-				password = $('#password').val(),
-				passwordConfirm = $('#password-confirm').val();
-
-			// check if a valid email is entered
-			if (!emailExp.test(email)) {
-				$('#email-error').show();
-				$('#email-error').val('Invalid email entered.');
-			} else {
-				$('#email-error').val('');
-				$('#email-error').hide();
-			}
-
-			// check if the password meets the minimum size
-			if (password.length < 8) {
-				$('#password-error').show();
-				$('#password-error').val('Password must be at least 8 characters long.');
-			} else {
-				// hide error div if no error
-				$('#password-error').val('');
-				$('#password-error').hide();
-			}
-			if (password !== passwordConfirm) {
-				// show div when passwords entered do not match
-				$('#password-confirm-error').show();
-				$('#password-confirm-error').val('Passwords do not match.');
-			} else {
-				// leave the div when passwords match, but change the color to green for success
-				$('#password-confirm-error').val('Password match.');
-				$('#password-confirm-error').css('background-color', 'green');
-			}
-
-		</script>
 	</body>
 </html>

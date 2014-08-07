@@ -1,5 +1,6 @@
-//auth.js
-// Handles all third-party log in credentials
+/*
+auth.js - Handles all third-party login credentials
+*/
 
 module.exports = {
 

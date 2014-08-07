@@ -1,6 +1,8 @@
-// config/passport.js
+/*
+passport.js - 
+*/
 
-// load everything we need
+// Inclusions
 var LocalStrategy = require('passport-local').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy,
 	flash = require('connect-flash'),
@@ -17,6 +19,7 @@ module.exports = function(passport) {
 		done(null, user.id);
 	});
 
+	// Deserialize user
 	passport.deserializeUser(function(id, done) {
 		User.findById(id, function(err, user) {
 			done(err, user);

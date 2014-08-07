@@ -2,7 +2,7 @@
 app.js - this is the central file of the app. It glues everything together.
 */
 
-// Let's start with adding all the modules to our app
+// Add modules to the app
 var flash = require('connect-flash'),
 	express = require('express'),
 	mongoose = require('mongoose'),
@@ -12,24 +12,25 @@ var flash = require('connect-flash'),
 	bodyParser = require('body-parser'),
 	session = require('express-session');
 
-// Finally, let's instantiate our app
+// Instantiate the app
 var app = express();
 
+// Connect to database
 var configDB = require('./config/database.js');
-// connect to database
 mongoose.connect(configDB.url);
 
+// Include passport
 require('./config/passport.js')(passport);
 
-// set up ejs for templating
+// Set up ejs
 app.set('view engine', 'ejs');
-// include all the files that aren't just in the root folder
+
+// Include all files not just in root
 app.set('views', __dirname + '/app/views');
-//app.use('/views', express.static(__dirname + '/app/views'));
 app.use('/assets', express.static(__dirname + '/app/views/assets'));
 app.use('/includes', express.static(__dirname + '/app/views/includes'));
 
-// Set up the app to use modules when needed
+// Set app to use modules when needed
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(flash());
@@ -40,9 +41,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// Let's link our routes.js file to the main app.js file
+// Link router to app
 require('./app/routes.js')(app, passport); // pass in our app and our fully configured passport
 
+// Console start message
 app.listen(8080, function() {
-	console.log('Listening on port 8080...');
+	console.log('Listening for some crazy cool shit on port 8080...');
 });
