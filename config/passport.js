@@ -10,9 +10,16 @@ var LocalStrategy = require('passport-local').Strategy,
 	configAuth = require('./auth.js'),
 	fb = require('fb'),
 	redis = require('redis'),
+	mysql = require('mysql'),
 	uuid = require('node-uuid'),
 
+	// connecting to databases
 	redisClient = redis.createClient(),
+	SQLconnection = mysql.createConnection({
+		host: 'localhost',
+		user: 'nevil',
+		password: 'xxxxxx'
+	}),
 
 	createExerciseList = function(uuid) {
 		return uuid + '-exercise-list';
