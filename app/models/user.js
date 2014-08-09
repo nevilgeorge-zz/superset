@@ -9,6 +9,11 @@ var mongoose = require('mongoose'),
 // Define User schema
 var userSchema = mongoose.Schema({
 	authType: String,
+	uuid: String,
+	exerciseList: String,
+	routineList: String,
+	exerciseHash: String,
+	routineHash: String,
 	local: {
 		email: String,
 		password: String,

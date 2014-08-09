@@ -8,7 +8,27 @@ var LocalStrategy = require('passport-local').Strategy,
 	flash = require('connect-flash'),
 	User = require('../app/models/user.js'),
 	configAuth = require('./auth.js'),
-	fb = require('fb');
+	fb = require('fb'),
+	redis = require('redis'),
+	uuid = require('node-uuid'),
+
+	redisClient = redis.createClient(),
+
+	createExerciseList = function(uuid) {
+		return uuid + '-exercise-list';
+	},
+
+	createRoutineList = function(uuid) {
+		return uuid + '-routine-list';
+	},
+
+	createExerciseHash = function(uuid) {
+		return uuid + '-exercise-hash';
+	},
+
+	createRoutineHash = function(uuid) {
+		return uuid + '-routine-hash';
+	};
 
 module.exports = function(passport) {
 	// passport sessions set up. Required for login sessions.
@@ -52,10 +72,15 @@ module.exports = function(passport) {
 					// create the user
 					var newUser = new User();
 					newUser.authType = 'local';
+					newUser.uuid = uuid.v1();
 					newUser.local.email = email;
 					newUser.local.password = newUser.generateHash(password);
 					// Since we are using body-parser with JSON, POSTed variables can be accessed from req.body
 					newUser.local.name = req.body.name;
+					newUser.exerciseList = createExerciseList(newUser.uuid);
+					newUser.routineList = createRoutineList(newUser.uuid);
+					newUser.exerciseHash = createExerciseHash(newUser.uuid);
+					newUser.routineHash = createRoutineHash(newUser.uuid);
 
 					newUser.save(function(err) {
 						if (err) {
