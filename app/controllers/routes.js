@@ -3,27 +3,55 @@ app.routes.js - Handles app routing
 */
 
 // Include User schema
-var User = require('../app/models/user.js');
+var User = require('../models/user.js');
+
 
 module.exports = function(app, passport) {
 
-	// Render login page
+	/*
+	 * Page Rendering
+	 */
+	// Home page
 	app.get('/', function(req, res) {
-		res.render('index.ejs', { message: req.flash('loginMessage')});
+		// Default main layout
+		res.render('index', {
+			message: req.flash('loginMessage')
+		});
+	});
+	// Signup page
+	app.get('/signup', function(req, res) {
+		// Default main layout
+		res.render('signup', {
+			message: req.flash('signupMessage')
+		});
+	});
+	// Profile page
+	app.get('/profile', isLoggedIn, function(req, res) {
+
+		// Pass either local or facebook name
+		var userName;
+		if(req.user.authType == 'local') userName = req.user.local.name;
+		else userName = req.user.facebook.name
+
+		// Default main layout
+		res.render('profile', {
+			user:   req.user,
+			name:   userName,
+			age:    20,
+			weight: 150
+		});
 	});
 
+
+	/*
+	 * Form Processing
+	 */
 	// Process login form
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/profile',
 		failureRedirect: '/',
 		failureFlash: true // allow flash messages
 	}));
-
-	// Render signup page
-	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
-	});
-
 	// Process signup form
 	app.post('/signup', passport.authenticate('local-signup', {
 		successRedirect: '/profile',
@@ -42,13 +70,6 @@ module.exports = function(app, passport) {
 			} else {
 				next(new Error('failed to load user'));
 			}
-		});
-	});
-
-	// Render profile page
-	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
-			user: req.user
 		});
 	});
 

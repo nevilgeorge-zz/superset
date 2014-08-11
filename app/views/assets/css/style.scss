@@ -290,7 +290,7 @@ header {
 				text-align: left;
 				width: calc(100% - 120px - 20px);
 				font-size: 20px;
-				color: $color4;
+				color: #444;
 			}
 			ul {
 				float: right;
@@ -303,11 +303,11 @@ header {
 					h4 {
 						display: inline-block;
 						font-size: 15px;
-						color: $color4;
+						color: #444;
 					}
 					span {
 						font-size: 12px;
-						color: $color4;
+						color: #666;
 					}
 				}
 			}
@@ -321,8 +321,7 @@ header {
 			width: 90%;
 
 			h2 {
-				color: $color4;
-				text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+				color: #444;
 			}
 			table {
 				width: 100%;
@@ -337,10 +336,11 @@ header {
 						background-color: #d5d5d5;
 						border-radius: 3px;
 						box-shadow: 0 1px 0 #fff;
+						cursor: pointer;
 
 						h4 {
 							font-size: 13px;
-							color: $color4;
+							color: #444;
 						}
 						a {
 							font-size: 13px;

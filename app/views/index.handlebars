@@ -1,0 +1,21 @@
+<main class="content" id="Log-In">
+	
+
+	<section id="login">
+		<h1>Superset</h1>
+
+		{{#if message.length}}
+		<div class="alert">{{ message }}</div>
+		{{/if}}
+		
+		<form action="/login" method="post">
+			<input type="text" name="email" placeholder="Email">
+			<input type="password" name="password" placeholder="Password">
+			<input type="submit" value="Log in">
+		</form>
+		<button type="submit"><i class="fa fa-facebook"></i>Log in with Facebook</button>
+		<a href="/signup">Don't have an account yet?</a>
+	</section>
+	
+
+</main>
