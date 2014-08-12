@@ -60,18 +60,18 @@ module.exports = function(app, passport) {
 	}));
 
 	// Doesn't do anything yet
-	app.param('email', function(req, res, next, email) {
-		User.findOne({'local.email': email}, function(err, user){
-			if (err) {
-				next(err);
-			} else if (user) {
-				req.user = user;
-				next();
-			} else {
-				next(new Error('failed to load user'));
-			}
-		});
-	});
+	// app.param('email', function(req, res, next, email) {
+	// 	User.findOne({'local.email': email}, function(err, user){
+	// 		if (err) {
+	// 			next(err);
+	// 		} else if (user) {
+	// 			req.user = user;
+	// 			next();
+	// 		} else {
+	// 			next(new Error('failed to load user'));
+	// 		}
+	// 	});
+	// });
 
 	// Route to get Facebook authentication
 	/*

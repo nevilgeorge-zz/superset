@@ -26,26 +26,22 @@ module.exports = function(passport) {
 	// passport sessions set up. Required for login sessions.
 	// Serialize (convert to text/binary form) when logged in, deserialize when logged out.
 
-var createExerciseList = function(user, uuid) {
-		console.log('create exercise list reached');
-		user.exerciseList = uuid + '-exercise-list';
-		//return uuid + '-exercise-list';
-	},
+	var createExerciseList = function(user, uuid) {
+			user.exerciseList = uuid + '-exercise-list';
+			//return uuid + '-exercise-list';
+		},
 
-	createRoutineList = function(user, uuid) {
-		console.log('create routine list reached');
-		user.routineList = uuid + '-routine-list';
-	},
+		createRoutineList = function(user, uuid) {
+			user.routineList = uuid + '-routine-list';
+		},
 
-	createExerciseHash = function(user, uuid) {
-		console.log('create exercise hash reached');
-		user.exerciseHash = uuid + '-exercise-hash';
-	},
+		createExerciseHash = function(user, uuid) {
+			user.exerciseHash = uuid + '-exercise-hash';
+		},
 
-	createRoutineHash = function(user, uuid) {
-		console.log('create routine hash reached');
-		user.routineHash = uuid + '-routine-hash';
-	};
+		createRoutineHash = function(user, uuid) {
+			user.routineHash = uuid + '-routine-hash';
+		};
 
 	// Serialize user
 	passport.serializeUser(function(user, done) {
@@ -161,6 +157,7 @@ var createExerciseList = function(user, uuid) {
 					var newUser = new User();
 					// pass in the form of authentication for this user
 					newUser.authType = 'facebook'
+					newUser.uuid = uuid.v1();
 					// set all the information required in the User model
 					newUser.facebook.id = profile.id;
 					newUser.facebook.token = token;
@@ -177,10 +174,15 @@ var createExerciseList = function(user, uuid) {
 							console.log(!response ? 'error occurred' : response.error);
 							return;
 						}
-						console.log(response.data[0].pic_big);
-						console.log(response.data[0].birthday);
 						newUser.facebook.profilePicture = response.data[0].pic_big;
 						newUser.facebook.birthday = response.data[0].birthday;
+
+						async.parallel([
+							createExerciseList(newUser, newUser.uuid),
+							createRoutineList(newUser, newUser.uuid),
+							createExerciseHash(newUser, newUser.uuid),
+							createRoutineHash(newUser, newUser.uuid)
+							]);
 
 						newUser.save(function(err) {
 							if (err) {
