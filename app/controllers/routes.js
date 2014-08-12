@@ -34,13 +34,13 @@ module.exports = function(app, passport) {
 		else userName = req.user.facebook.name
 
 		// Default main layout
-		res.render('profile.handlebars', {
-			user:   req.user,
-			name:   userName,
-			age:    20,
-			weight: 150
-		});
+	res.render('profile.handlebars', {
+		user:   req.user,
+		name:   userName,
+		age:    20,
+		weight: 150
 	});
+});
 
 
 	/*
@@ -78,16 +78,16 @@ module.exports = function(app, passport) {
 	The 'scope' is used to get extra information that isn't provided by default in the token
 	that is returned from Facebook. The token is an OAuth token, since Facebook authorization
 	uses OAuth 2.0.
-	 */
+	*/
 	app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 	// Route after Facebook authorization/ OAuth token received
 	app.get('/auth/facebook/callback', 
 		passport.authenticate('facebook',
-			{ 
-				successRedirect: '/profile',
-				failureRedirect: '/'
-		 }));
+		{ 
+			successRedirect: '/profile',
+			failureRedirect: '/'
+		}));
 
 	// Facilitate log out functionality
 	app.get('/logout', function(req, res) {

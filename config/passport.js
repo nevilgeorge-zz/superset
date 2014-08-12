@@ -12,6 +12,7 @@ var LocalStrategy = require('passport-local').Strategy,
 	redis = require('redis'),
 	mysql = require('mysql'),
 	uuid = require('node-uuid'),
+	async = require('async'),
 
 	// connecting to databases
 	redisClient = redis.createClient(),
@@ -19,27 +20,32 @@ var LocalStrategy = require('passport-local').Strategy,
 		host: 'localhost',
 		user: 'nevil',
 		password: 'xxxxxx'
-	}),
-
-	createExerciseList = function(uuid) {
-		return uuid + '-exercise-list';
-	},
-
-	createRoutineList = function(uuid) {
-		return uuid + '-routine-list';
-	},
-
-	createExerciseHash = function(uuid) {
-		return uuid + '-exercise-hash';
-	},
-
-	createRoutineHash = function(uuid) {
-		return uuid + '-routine-hash';
-	};
+	});
 
 module.exports = function(passport) {
 	// passport sessions set up. Required for login sessions.
 	// Serialize (convert to text/binary form) when logged in, deserialize when logged out.
+
+var createExerciseList = function(user, uuid) {
+		console.log('create exercise list reached');
+		user.exerciseList = uuid + '-exercise-list';
+		//return uuid + '-exercise-list';
+	},
+
+	createRoutineList = function(user, uuid) {
+		console.log('create routine list reached');
+		user.routineList = uuid + '-routine-list';
+	},
+
+	createExerciseHash = function(user, uuid) {
+		console.log('create exercise hash reached');
+		user.exerciseHash = uuid + '-exercise-hash';
+	},
+
+	createRoutineHash = function(user, uuid) {
+		console.log('create routine hash reached');
+		user.routineHash = uuid + '-routine-hash';
+	};
 
 	// Serialize user
 	passport.serializeUser(function(user, done) {
@@ -84,20 +90,22 @@ module.exports = function(passport) {
 					newUser.local.password = newUser.generateHash(password);
 					// Since we are using body-parser with JSON, POSTed variables can be accessed from req.body
 					newUser.local.name = req.body.name;
-					newUser.exerciseList = createExerciseList(newUser.uuid);
-					newUser.routineList = createRoutineList(newUser.uuid);
-					newUser.exerciseHash = createExerciseHash(newUser.uuid);
-					newUser.routineHash = createRoutineHash(newUser.uuid);
-
+					async.parallel([
+						createExerciseList(newUser, newUser.uuid),
+						createRoutineList(newUser, newUser.uuid),
+						createExerciseHash(newUser, newUser.uuid),
+						createRoutineHash(newUser, newUser.uuid)
+						]);
 					newUser.save(function(err) {
 						if (err) {
 							throw err;
+						} else {
+							return done(err, newUser);
 						}
-						return done(err, newUser);
 					});
 				}
 			});
-		});
+		});	
 	}
 	));
 
