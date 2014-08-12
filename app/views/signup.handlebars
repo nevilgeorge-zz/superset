@@ -7,7 +7,12 @@
 		<div class="alert">{{ message }}</div>
 		{{/if}}
 		
-		<button type="submit"><i class="fa fa-facebook"></i>Sign up with Facebook</button>
+		<a href="/auth/facebook">
+			<button>
+				<i class="fa fa-facebook"></i>
+				Sign up with Facebook
+			</button>
+		</a>
 		<h3>Or</h3>
 		<form action="/signup" method="post">
 			<input type="text" name="name" placeholder="Your name">

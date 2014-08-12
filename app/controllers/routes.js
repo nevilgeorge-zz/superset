@@ -14,14 +14,14 @@ module.exports = function(app, passport) {
 	// Home page
 	app.get('/', function(req, res) {
 		// Default main layout
-		res.render('index', {
+		res.render('index.handlebars', {
 			message: req.flash('loginMessage')
 		});
 	});
 	// Signup page
 	app.get('/signup', function(req, res) {
 		// Default main layout
-		res.render('signup', {
+		res.render('signup.handlebars', {
 			message: req.flash('signupMessage')
 		});
 	});
@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
 		else userName = req.user.facebook.name
 
 		// Default main layout
-		res.render('profile', {
+		res.render('profile.handlebars', {
 			user:   req.user,
 			name:   userName,
 			age:    20,

@@ -28,9 +28,13 @@ require('./config/passport.js')(passport);
 
 
 // Use Handlebars as view engine
-app.set('views',    __dirname + '/app/views');
+app.set('views', __dirname + '/app/views');
 app.use('/assets', express.static(__dirname + '/app/views/assets'));
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+	defaultLayout: 'main',
+	layoutsDir: app.get('views') + '/layouts',
+	partialsDir: app.get('views') + '/partials'
+}));
 app.set('view engine', 'handlebars');
 
 
