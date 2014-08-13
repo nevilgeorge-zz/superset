@@ -49,14 +49,24 @@ $(document).ready(function() {
 			$('#password-confirm-error').css('background-color', 'green');
 		}
 	}
+	function redirectToFacebookLogin() {
+		
+		window.location.href = "/auth/facebook";
+	}
 
 
 	/* 
 	 * Events
 	 */
+	/* Sign up form submit button clicked */
 	$('#Sign-Up #submit').click(function() {
 		console.log('Sign up form submit button clicked');
 		signupCheck();
+	});
+	/* Log in with Facebook button clicked on login page */
+	$('#Log-In button#facebook-login').click(function() {
+		console.log('Log in with Facebook button clicked');
+		redirectToFacebookLogin();
 	});
 
 });
