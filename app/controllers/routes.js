@@ -41,7 +41,6 @@ module.exports = function(app, passport) {
 
 	// Profile page
 	app.get('/profile/:uuid', isLoggedIn, function(req, res) {
-		console.log(req.params);
 		// Pass either local or facebook name
 		var userName;
 		if (req.user.authType == 'local') {
@@ -68,29 +67,15 @@ module.exports = function(app, passport) {
 		failureRedirect: '/',
 		failureFlash: true // allow flash messages
 	}), function(req, res) {
-		//console.log();
 		res.redirect('/profile/' + req.user.uuid);
 	});
 	// Process signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile/:uuid',
 		failureRedirect: '/signup',
 		failureFlash: true // allow flash messages
-	}));
-
-	// Doesn't do anything yet
-	// app.param('email', function(req, res, next, email) {
-	// 	User.findOne({'local.email': email}, function(err, user){
-	// 		if (err) {
-	// 			next(err);
-	// 		} else if (user) {
-	// 			req.user = user;
-	// 			next();
-	// 		} else {
-	// 			next(new Error('failed to load user'));
-	// 		}
-	// 	});
-	// });
+	}), function(req, res) {
+		res.redirect('/profile/' + req.user.uuid);
+	});
 
 	// Route to get Facebook authentication
 	/*
@@ -104,9 +89,10 @@ module.exports = function(app, passport) {
 	app.get('/auth/facebook/callback', 
 		passport.authenticate('facebook',
 		{ 
-			successRedirect: '/profile/:uuid',
 			failureRedirect: '/'
-		}));
+		}), function(req, res) {
+			res.redirect('/profile/' + req.user.uuid);
+		});
 
 	// Facilitate log out functionality
 	app.get('/logout', function(req, res) {
