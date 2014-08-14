@@ -25,22 +25,39 @@ module.exports = function(app, passport) {
 			message: req.flash('signupMessage')
 		});
 	});
-	// Profile page
-	app.get('/profile', isLoggedIn, function(req, res) {
 
+	app.param('uuid', function(req, res, next, uuid) {
+		User.findOne({ 'uuid': uuid }, function(err, user) {
+			if (err) {
+				next(err);
+			} else if (user) {
+				req.user = user;
+				next();
+			} else {
+				next(new Error('user could not be loaded!'));
+			}
+		});
+	});
+
+	// Profile page
+	app.get('/profile/:uuid', isLoggedIn, function(req, res) {
+		console.log(req.params);
 		// Pass either local or facebook name
 		var userName;
-		if(req.user.authType == 'local') userName = req.user.local.name;
-		else userName = req.user.facebook.name
+		if (req.user.authType == 'local') {
+			userName = req.user.local.name;
+		} else {
+			userName = req.user.facebook.name;
+		}
 
 		// Default main layout
-	res.render('profile.handlebars', {
-		user:   req.user,
-		name:   userName,
-		age:    20,
-		weight: 150
+		res.render('profile.handlebars', {
+			user:   req.user,
+			name:   userName,
+			age:    20,
+			weight: 150
+		});
 	});
-});
 
 
 	/*
@@ -48,13 +65,15 @@ module.exports = function(app, passport) {
 	 */
 	// Process login form
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
 		failureRedirect: '/',
 		failureFlash: true // allow flash messages
-	}));
+	}), function(req, res) {
+		//console.log();
+		res.redirect('/profile/' + req.user.uuid);
+	});
 	// Process signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
+		successRedirect: '/profile/:uuid',
 		failureRedirect: '/signup',
 		failureFlash: true // allow flash messages
 	}));
@@ -85,7 +104,7 @@ module.exports = function(app, passport) {
 	app.get('/auth/facebook/callback', 
 		passport.authenticate('facebook',
 		{ 
-			successRedirect: '/profile',
+			successRedirect: '/profile/:uuid',
 			failureRedirect: '/'
 		}));
 
@@ -96,6 +115,10 @@ module.exports = function(app, passport) {
 	});
 
 };
+
+var getUUID = function(req, res, next) {
+
+}
 
 // Route middleware, makes sure user is logged in
 var isLoggedIn = function(req, res, next) {
