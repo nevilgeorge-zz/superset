@@ -3,7 +3,8 @@ app.routes.js - Handles app routing
 */
 
 // Include User schema
-var User = require('../models/user.js');
+var User = require('../models/user.js'),
+	fs = require('fs');
 
 
 module.exports = function(app, passport) {
@@ -56,6 +57,11 @@ module.exports = function(app, passport) {
 			age:    20,
 			weight: 150
 		});
+	});
+
+	app.get('/edit', isLoggedIn, function(req, res) {
+		var currentUser = req.user;
+		res.render('editProfile.handlebars', { user: currentUser });
 	});
 
 
