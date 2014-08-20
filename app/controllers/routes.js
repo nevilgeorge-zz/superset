@@ -59,9 +59,22 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// Edit profile page
 	app.get('/edit', isLoggedIn, function(req, res) {
 		var currentUser = req.user;
 		res.render('editProfile.handlebars', { user: currentUser });
+	});
+
+	// Edit profile page form submit
+	app.post('/edit', function(req, res) {
+		User.findOne({ 'uuid': req.user.uuid }, function(err, user) {
+			if (err) {
+				throw err;
+			} else {
+				
+			}
+
+		})
 	});
 
 
