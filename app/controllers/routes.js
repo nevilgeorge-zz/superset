@@ -67,14 +67,26 @@ module.exports = function(app, passport) {
 
 	// Edit profile page form submit
 	app.post('/edit', function(req, res) {
-		User.findOne({ 'uuid': req.user.uuid }, function(err, user) {
-			if (err) {
-				throw err;
-			} else {
-				
-			}
+		// Subject to change of schema
+		var updateObj = {};
+		if (req.body.name != '') {
+			updateObj.name = req.body.name;
+		}
 
-		})
+		if (req.body.email != '') {
+			updateObj.email = req.body.email;
+		}
+
+		if (req.body.password != '') {
+			updateObj.password = req.body.password;
+		}
+		User.findOneAndUpdate({ 'uuid': req.user.uuid}, updateObj, function(err, done) {
+			if (err) {
+				return done(err);
+			} else {
+				return done();
+			}
+		});
 	});
 
 
